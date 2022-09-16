@@ -12,7 +12,6 @@ public class VigenereCipher {
             len = i - key.length() * j;
             newString += key.charAt(len);
         }
-        System.out.println(newString);
         return newString;
     }
 
@@ -41,16 +40,10 @@ public class VigenereCipher {
         int decryptedindex = 0;
         for (int i = 0; i < s.length(); i++) {
             if (Character.isLowerCase(s.charAt(i))) {
-                System.out.println(i + " " + CaesarCipher.LowerCharToNumber(s.charAt(i)));
-                System.out.println(i + " " + CaesarCipher.LowerCharToNumber(newMessage.charAt(i)));
                 decryptedindex = (CaesarCipher.LowerCharToNumber(s.charAt(i)) - CaesarCipher.LowerCharToNumber(newMessage.charAt(i)) + 26) % 26;
-                System.out.println(decryptedindex);
                 decryptedMessage += CaesarCipher.NumberToLowerChar(decryptedindex);
             } else if (Character.isUpperCase(s.charAt(i))) {
-                System.out.println(i + " " + CaesarCipher.UpperCharToNumber(s.charAt(i)));
-                System.out.println(i + " " + CaesarCipher.LowerCharToNumber(newMessage.charAt(i)));
                 decryptedindex = (CaesarCipher.UpperCharToNumber(s.charAt(i)) - CaesarCipher.LowerCharToNumber(newMessage.charAt(i)) + 26) % 26;
-                System.out.println(decryptedindex);
                 decryptedMessage += CaesarCipher.NumberToUpperChar(decryptedindex);
             } else {
                 decryptedMessage += s.charAt(i);
