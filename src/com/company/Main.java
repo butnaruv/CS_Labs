@@ -12,12 +12,16 @@ public class Main {
 //        String s2 = CaesarCipher.DecodingCaesarCipher(s1, key);
 //        System.out.println(s2);
         // System.out.println(CaesarCipherWithPermutation.AddLettersInList());
-        String key = "dina";
         // System.out.println(CaesarCipherWithPermutation.StartTheNewAlphabetList(key,CaesarCipherWithPermutation.AddLettersInList()));
-        String newMessage1 = CaesarCipherWithPermutation.EncryptionWithPermutation("eu AM dispozitie", key);
-        System.out.println(newMessage1);
-        String newMessage2 = CaesarCipherWithPermutation.DecryptionWithPermutation("Lddddegn", key);
-        System.out.println(newMessage2);
+        ///////Second example
+//        String key = "dina";
+//        String newMessage1 = CaesarCipherWithPermutation.EncryptionWithPermutation("eu AM dispozitie", key);
+//        System.out.println(newMessage1);
+//        String newMessage2 = CaesarCipherWithPermutation.DecryptionWithPermutation("Lddddegn", key);
+//        System.out.println(newMessage2);
+        ////Third example
+        System.out.println(VigenereCipher.VigenereEncryption("a mea", "sn"));
+        System.out.println(VigenereCipher.VigenereDecryption("Zrq", "sn"));
     }
 
 }
