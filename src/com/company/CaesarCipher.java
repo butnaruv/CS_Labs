@@ -1,55 +1,40 @@
 package com.company;
 
-public class CaesarCipher {
-    static Integer LowerCharToNumber(char c) {
-        int number = (int) c - 97;
-        return number;
-    }
+public class CaesarCipher extends LettersManipulation{
 
-    static Integer UpperCharToNumber(char c) {
-        int number = (int) c - 65;
-        return number;
-    }
 
-    static char NumberToLowerChar(int n) {
-        char ch = (char) (n + 97);
-        return ch;
-    }
-
-    static char NumberToUpperChar(int n) {
-        char ch = (char) (n + 65);
-        return ch;
-    }
-
-    static String EncodingCaesarCipher(String s, int key) {
-        String newString = "";
-        for (char character : s.toCharArray()) {
+    static String Encrypt(String message, int key) {
+        StringBuilder encryptedMessage = new StringBuilder();
+        int indexOfEncryptedLetter;
+        for (char character : message.toCharArray()) {
             if (Character.isLowerCase(character)) {
-                int e = (LowerCharToNumber(character) + key) % 26;
-                newString += NumberToLowerChar(e);
+                indexOfEncryptedLetter = (LowerCharToNumber(character) + key) % 26;
+                encryptedMessage.append(NumberToLowerChar(indexOfEncryptedLetter));
             } else if (Character.isUpperCase(character)) {
-                int e = (UpperCharToNumber(character) + key) % 26;
-                newString += NumberToUpperChar(e);
+                indexOfEncryptedLetter = (UpperCharToNumber(character) + key) % 26;
+                encryptedMessage.append(NumberToUpperChar(indexOfEncryptedLetter));
             } else {
-                newString += character;
+                encryptedMessage.append(character);
             }
         }
-        return newString;
+        return encryptedMessage.toString();
     }
 
-    static String DecodingCaesarCipher(String s, int key) {
-        String newString = "";
-        for (char character : s.toCharArray()) {
+    static String Decrypt(String message, int key) {
+        StringBuilder decryptedMessage = new StringBuilder();
+        int indexOfDecryptedLetter;
+        for (char character : message.toCharArray()) {
             if (Character.isLowerCase(character)) {
-                int e = (LowerCharToNumber(character) - key + 26) % 26;
-                newString += NumberToLowerChar(e);
+                indexOfDecryptedLetter = (LowerCharToNumber(character) - key + 26) % 26;
+                decryptedMessage.append(NumberToLowerChar(indexOfDecryptedLetter));
             } else if (Character.isUpperCase(character)) {
-                int e = (UpperCharToNumber(character) - key + 26) % 26;
-                newString += NumberToUpperChar(e);
+                indexOfDecryptedLetter = (UpperCharToNumber(character) - key + 26) % 26;
+                decryptedMessage.append(NumberToUpperChar(indexOfDecryptedLetter));
             } else {
-                newString += character;
+                decryptedMessage.append(character);
             }
         }
-        return newString;
+        return decryptedMessage.toString();
     }
+
 }

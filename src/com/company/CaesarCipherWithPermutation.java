@@ -5,79 +5,62 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-public class CaesarCipherWithPermutation {
-    static List<Character> AddLettersInList() {
-        List<Character> Alphabet = new ArrayList<>();
-        for (int i = 0; i < 26; i++) {
-            Alphabet.add(CaesarCipher.NumberToLowerChar(i));
-        }
-        return Alphabet;
-    }
+public class CaesarCipherWithPermutation extends LettersManipulation {
 
-    static HashSet<Character> StartTheNewAlphabetList(String s, List<Character> Alph) {
-        HashSet<Character> NewAlphabet = new LinkedHashSet<Character>();
-        for (char character : s.toCharArray()) {
-            NewAlphabet.add(character);
-        }
-        for (int i = 0; i < 26; i++) {
-            NewAlphabet.add(Alph.get(i));
-        }
-        return NewAlphabet;
-    }
 
     //function to obtain the index of a given letter from the list
-    static Integer GetIndex(Character ch, List<Character> list) {
+    static Integer GetIndex(Character character, List<Character> list) {
         int index = 0;
         for (int i = 0; i < 26; i++) {
-            if (ch == list.get(i)) {
+            if (character == list.get(i)) {
                 index = i;
             }
         }
         return index;
     }
 
-    static String EncryptionWithPermutation(String message, String key) {
+    static String Encrypt(String message, String keyWord, int key) {
         List<Character> InitialAlphabet = AddLettersInList();
-        List<Character> list = new ArrayList<Character>(StartTheNewAlphabetList(key, InitialAlphabet));
+        List<Character> list = new ArrayList<Character>(StartTheNewAlphabetList(keyWord, InitialAlphabet));
 //        System.out.println(InitialAlphabet);
 //        System.out.println(list);
-        String encryptedMessage = "";
+        StringBuilder encryptedMessage = new StringBuilder();
         for (char character : message.toCharArray()) {
             int index = 0;
             if (Character.isUpperCase(character)) {
                 character = Character.toLowerCase(character);
-                index = GetIndex(character, InitialAlphabet);
-                encryptedMessage += Character.toUpperCase(list.get(index));
+                index = GetIndex(character, list);
+                encryptedMessage.append(Character.toUpperCase(list.get(index + key)));
             } else if (Character.isLowerCase(character)) {
-                index = GetIndex(character, InitialAlphabet);
-                encryptedMessage += list.get(index);
+                index = GetIndex(character, list);
+                encryptedMessage.append(list.get(index + key));
             } else {
-                encryptedMessage += character;
+                encryptedMessage.append(character);
             }
         }
-        return encryptedMessage;
+        return encryptedMessage.toString();
     }
 
-    static String DecryptionWithPermutation(String message, String key) {
+    static String Decrypt(String message, String keyWord, int key) {
         List<Character> InitialAlphabet = AddLettersInList();
-        List<Character> list = new ArrayList<Character>(StartTheNewAlphabetList(key, InitialAlphabet));
-        System.out.println(InitialAlphabet);
-        System.out.println(list);
-        String decryptedMessage = "";
+        List<Character> list = new ArrayList<Character>(StartTheNewAlphabetList(keyWord, InitialAlphabet));
+//        System.out.println(InitialAlphabet);
+//        System.out.println(list);
+        StringBuilder decryptedMessage = new StringBuilder();
         for (char character : message.toCharArray()) {
             int index = 0;
             if (Character.isUpperCase(character)) {
                 character = Character.toLowerCase(character);
                 index = GetIndex(character, list);
-                decryptedMessage += Character.toUpperCase(InitialAlphabet.get(index));
+                decryptedMessage.append(Character.toUpperCase(list.get((index - key + 26) % 26)));
             } else if (Character.isLowerCase(character)) {
                 index = GetIndex(character, list);
-                decryptedMessage += InitialAlphabet.get(index);
+                decryptedMessage.append(list.get((index - key + 26) % 26));
             } else {
-                decryptedMessage += character;
+                decryptedMessage.append(character);
             }
         }
-        return decryptedMessage;
+        return decryptedMessage.toString();
     }
 }
 

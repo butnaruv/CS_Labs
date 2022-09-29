@@ -1,55 +1,59 @@
 package com.company;
 
-public class VigenereCipher {
-    static String ReplaceTheMessageWithTheKey(String s, String key) {
-        String newString = "";
+public class VigenereCipher extends LettersManipulation {
+    static String ReplaceTheMessageWithTheKey(String message, String key) {
+        StringBuilder concatenatedKey = new StringBuilder();
         int j = 0;
-        for (int i = 0; i < s.length(); i++) {
-            int len = i - key.length() * j;
-            if (len == key.length()) {
-                j = j + 1;
+        for (int i = 0; i < message.length(); i++) {
+            if (j == key.length()) {
+                j = 0;
             }
-            len = i - key.length() * j;
-            newString += key.charAt(len);
+            if (Character.isUpperCase(message.charAt(i)) || Character.isLowerCase(message.charAt(i))) {
+                concatenatedKey.append(key.charAt(j));
+                j += 1;
+            } else {
+                concatenatedKey.append(" ");
+            }
+
         }
-        return newString;
+        return concatenatedKey.toString();
     }
 
-    static String VigenereEncryption(String s, String key) {
-        String newMessage = ReplaceTheMessageWithTheKey(s, key);
-        String encryptedMessage = "";
-        int encryptedindex = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isLowerCase(s.charAt(i))) {
-                encryptedindex = (CaesarCipher.LowerCharToNumber(s.charAt(i)) + CaesarCipher.LowerCharToNumber(newMessage.charAt(i))) % 26;
-                encryptedMessage += CaesarCipher.NumberToLowerChar(encryptedindex);
-            } else if (Character.isUpperCase(s.charAt(i))) {
-                encryptedindex = (CaesarCipher.UpperCharToNumber(s.charAt(i)) + CaesarCipher.LowerCharToNumber(newMessage.charAt(i))) % 26;
-                encryptedMessage += CaesarCipher.NumberToUpperChar(encryptedindex);
+    static String Encrypt(String message, String key) {
+        String newMessage = ReplaceTheMessageWithTheKey(message, key);
+        StringBuilder encryptedMessage = new StringBuilder();
+        int indexOfLetter;
+        for (int i = 0; i < message.length(); i++) {
+            if (Character.isLowerCase(message.charAt(i))) {
+                indexOfLetter = (LowerCharToNumber(message.charAt(i)) + LowerCharToNumber(newMessage.charAt(i))) % 26;
+                encryptedMessage.append(NumberToLowerChar(indexOfLetter));
+            } else if (Character.isUpperCase(message.charAt(i))) {
+                indexOfLetter = (UpperCharToNumber(message.charAt(i)) + LowerCharToNumber(newMessage.charAt(i))) % 26;
+                encryptedMessage.append(NumberToUpperChar(indexOfLetter));
             } else {
-                encryptedMessage += s.charAt(i);
+                encryptedMessage.append(message.charAt(i));
             }
 
         }
-        return encryptedMessage;
+        return encryptedMessage.toString();
     }
 
-    static String VigenereDecryption(String s, String key) {
-        String newMessage = ReplaceTheMessageWithTheKey(s, key);
-        String decryptedMessage = "";
-        int decryptedindex = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (Character.isLowerCase(s.charAt(i))) {
-                decryptedindex = (CaesarCipher.LowerCharToNumber(s.charAt(i)) - CaesarCipher.LowerCharToNumber(newMessage.charAt(i)) + 26) % 26;
-                decryptedMessage += CaesarCipher.NumberToLowerChar(decryptedindex);
-            } else if (Character.isUpperCase(s.charAt(i))) {
-                decryptedindex = (CaesarCipher.UpperCharToNumber(s.charAt(i)) - CaesarCipher.LowerCharToNumber(newMessage.charAt(i)) + 26) % 26;
-                decryptedMessage += CaesarCipher.NumberToUpperChar(decryptedindex);
+    static String Decrypt(String message, String key) {
+        String newMessage = ReplaceTheMessageWithTheKey(message, key);
+        StringBuilder decryptedMessage = new StringBuilder();
+        int indexOfLetter;
+        for (int i = 0; i < message.length(); i++) {
+            if (Character.isLowerCase(message.charAt(i))) {
+                indexOfLetter = (LowerCharToNumber(message.charAt(i)) - LowerCharToNumber(newMessage.charAt(i)) + 26) % 26;
+                decryptedMessage.append(NumberToLowerChar(indexOfLetter));
+            } else if (Character.isUpperCase(message.charAt(i))) {
+                indexOfLetter = (UpperCharToNumber(message.charAt(i)) - LowerCharToNumber(newMessage.charAt(i)) + 26) % 26;
+                decryptedMessage.append(NumberToUpperChar(indexOfLetter));
             } else {
-                decryptedMessage += s.charAt(i);
+                decryptedMessage.append(message.charAt(i));
             }
 
         }
-        return decryptedMessage;
+        return decryptedMessage.toString();
     }
 }
