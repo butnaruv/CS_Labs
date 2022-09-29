@@ -100,7 +100,7 @@ HashSet<Character> NewAlphabet = new LinkedHashSet<Character>();
 
 &ensp;&ensp;&ensp;The logic for the encrytion and decryption of the message can be expressed mathematically as follow:
 
-&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;$$c_{i} = m_{i} + k_{i}(mod\ n) $$
+&ensp;&ensp;&ensp;&ensp;&ensp;&ensp; $$c_{i} = m_{i} + k_{i}(mod\ n) $$
 &ensp;&ensp;&ensp;&ensp;&ensp;&ensp; $$m_{i} = c_{i} - k_{i}(mod\ n) $$
 
 - $c_{i}$: the position in alphabet of the $i^{th}$ character from the encrypted message,
