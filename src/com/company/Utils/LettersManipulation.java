@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Utils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -6,27 +6,27 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 public abstract class LettersManipulation {
-    static Integer LowerCharToNumber(char character) {
+    public static Integer LowerCharToNumber(char character) {
         int indexOfLetter = (int) character - 97;
         return indexOfLetter;
     }
 
-    static Integer UpperCharToNumber(char character) {
+    public static Integer UpperCharToNumber(char character) {
         int indexOfLetter = (int) character - 65;
         return indexOfLetter;
     }
 
-    static char NumberToLowerChar(int indexOfLetter) {
+    public static char NumberToLowerChar(int indexOfLetter) {
         char character = (char) (indexOfLetter + 97);
         return character;
     }
 
-    static char NumberToUpperChar(int indexOfLetter) {
+    public static char NumberToUpperChar(int indexOfLetter) {
         char character = (char) (indexOfLetter + 65);
         return character;
     }
 
-    final static List<Character> AddLettersInList() {
+    public final static List<Character> AddLettersInList() {
         List<Character> Alphabet = new ArrayList<>();
         for (int i = 0; i < 26; i++) {
             Alphabet.add(NumberToLowerChar(i));
@@ -34,7 +34,7 @@ public abstract class LettersManipulation {
         return Alphabet;
     }
 
-    static HashSet<Character> StartTheNewAlphabetList(String keyWord, List<Character> Alphabet) {
+    public static HashSet<Character> StartTheNewAlphabetList(String keyWord, List<Character> Alphabet) {
         HashSet<Character> NewAlphabet = new LinkedHashSet<Character>();
         for (char character : keyWord.toCharArray()) {
             NewAlphabet.add(character);

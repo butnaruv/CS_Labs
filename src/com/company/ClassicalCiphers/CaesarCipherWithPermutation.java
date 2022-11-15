@@ -1,8 +1,8 @@
-package com.company;
+package com.company.ClassicalCiphers;
+
+import com.company.Utils.LettersManipulation;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 public class CaesarCipherWithPermutation extends LettersManipulation {
@@ -19,7 +19,7 @@ public class CaesarCipherWithPermutation extends LettersManipulation {
         return index;
     }
 
-    static String Encrypt(String message, String keyWord, int key) {
+    public static String Encrypt(String message, String keyWord, int key) {
         List<Character> InitialAlphabet = AddLettersInList();
         List<Character> list = new ArrayList<Character>(StartTheNewAlphabetList(keyWord, InitialAlphabet));
 //        System.out.println(InitialAlphabet);
@@ -41,7 +41,7 @@ public class CaesarCipherWithPermutation extends LettersManipulation {
         return encryptedMessage.toString();
     }
 
-    static String Decrypt(String message, String keyWord, int key) {
+    public static String Decrypt(String message, String keyWord, int key) {
         List<Character> InitialAlphabet = AddLettersInList();
         List<Character> list = new ArrayList<Character>(StartTheNewAlphabetList(keyWord, InitialAlphabet));
 //        System.out.println(InitialAlphabet);

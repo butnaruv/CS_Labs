@@ -1,4 +1,6 @@
-package com.company;
+package com.company.ClassicalCiphers;
+
+import com.company.Utils.LettersManipulation;
 
 import java.util.*;
 
@@ -61,7 +63,7 @@ public class PlayfairCipher extends LettersManipulation {
         return OddNumberOfLetters(newMessage.toString());
     }
 
-    static String Encrypt(String message, String key) {
+   public static String Encrypt(String message, String key) {
         message = ToAddOrNotToAddX(message);
         HashMap<String, ArrayList<Integer>> Table = TableAsHashMap(key);
         char[][] table = CipherTable(key);
@@ -82,7 +84,7 @@ public class PlayfairCipher extends LettersManipulation {
         return encryptedMessage.toString();
     }
 
-    static String Decrypt(String message, String key) {
+   public static String Decrypt(String message, String key) {
         message = ToAddOrNotToAddX(message);
         HashMap<String, ArrayList<Integer>> Table = TableAsHashMap(key);
         char[][] table = CipherTable(key);

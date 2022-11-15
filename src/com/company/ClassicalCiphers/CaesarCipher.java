@@ -1,9 +1,11 @@
-package com.company;
+package com.company.ClassicalCiphers;
 
-public class CaesarCipher extends LettersManipulation{
+import com.company.Utils.LettersManipulation;
+
+public class CaesarCipher extends LettersManipulation {
 
 
-    static String Encrypt(String message, int key) {
+   public static String Encrypt(String message, int key) {
         StringBuilder encryptedMessage = new StringBuilder();
         int indexOfEncryptedLetter;
         for (char character : message.toCharArray()) {
@@ -20,7 +22,7 @@ public class CaesarCipher extends LettersManipulation{
         return encryptedMessage.toString();
     }
 
-    static String Decrypt(String message, int key) {
+   public static String Decrypt(String message, int key) {
         StringBuilder decryptedMessage = new StringBuilder();
         int indexOfDecryptedLetter;
         for (char character : message.toCharArray()) {

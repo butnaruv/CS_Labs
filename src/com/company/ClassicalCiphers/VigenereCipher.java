@@ -1,4 +1,6 @@
-package com.company;
+package com.company.ClassicalCiphers;
+
+import com.company.Utils.LettersManipulation;
 
 public class VigenereCipher extends LettersManipulation {
     static String ReplaceTheMessageWithTheKey(String message, String key) {
@@ -19,7 +21,7 @@ public class VigenereCipher extends LettersManipulation {
         return concatenatedKey.toString();
     }
 
-    static String Encrypt(String message, String key) {
+    public static String Encrypt(String message, String key) {
         String newMessage = ReplaceTheMessageWithTheKey(message, key);
         StringBuilder encryptedMessage = new StringBuilder();
         int indexOfLetter;
@@ -38,7 +40,7 @@ public class VigenereCipher extends LettersManipulation {
         return encryptedMessage.toString();
     }
 
-    static String Decrypt(String message, String key) {
+    public static String Decrypt(String message, String key) {
         String newMessage = ReplaceTheMessageWithTheKey(message, key);
         StringBuilder decryptedMessage = new StringBuilder();
         int indexOfLetter;
