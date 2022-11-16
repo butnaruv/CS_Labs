@@ -33,42 +33,96 @@
 1. Conversion of message from letters to binary.
 
 &ensp;&ensp;&ensp; Each letter of the message will be converted into an integer value. Then, using modulo 2 operation, the integer value will be converted into an 8 bit binary value, which should be inverted. All the values will be added to a list.
-All the methods responsible for this step are implemented in the class LettersToBinaryConverter.
+All the methods responsible for this step are implemented in the class _LettersToBinaryConverter_.
 
 2. Initialization of 3 Linear-Feedback Shift Registers (LFSR) of different size with value of 0:
    - LFSR1 - 18 bits;
    - LFSR2 - 22 bits;
    - LFSR3 - 23 bits.
-3. Random generation of a session key of 64 bits
+3. Random generation of a session key of 64 bits. It is done in the method called _RandomGenearationOfSignals()_, which requires as input only the size value of the list to be generated. The logic to generate signals of 1's and 0's is implemented below. It uses an instance of the class _Random()_ in order to generate signals. The generation itself is made through a for loop, which iterates until the input (size of the list to be generated) is reached:
+
+```
+Random ran = new Random();
+   for (int i = 0; i < number; i++) {
+      int nxt = ran.nextInt(2);
+      listOfSignals.add(nxt);
+   }
+```
+
 4. For each LFSR, performing a xor operation between feedback bits and each bit of session key.
    - Feedback bits of LFSR1 are: bit 13, bit 16, bit 17, bit 18;
    - Feedback bits of LFSR2 are: bit 20, bit 21;
    - Feedback bits of LFSR3 are: bit 7, bit 20, bit 21, bit 22.
 
 &ensp;&ensp;&ensp;The xor operation is performed 64 times, such that each bit of the key stream is used.
-Each time when a xor operation is performed, the register is shifted one space to the right and the computed value from xor is added to the register in the first position(LFSR[0]). 5. Random generation of a frame counter of 22 bits. 6. For each LFSR performing a xor operations between feedback bits and each bit of frame counter, such as in step 4. 7. Computation of the majority of clocking bits of registers
+Each time when a xor operation is performed, the register is shifted one space to the right and the computed value from xor is added to the register in the first position(LFSR[0]). As it can be seen below, the number of iterations is equal to the size of the list to be XORed with registers. Then, after performing XOR operation between feedback bits, another XOR is performed between the list of bits (session key in this case) and the output of _FeedbackBitsXored()_ method. Then, the register is shifted and the last result is added in the first position.
+
+```
+for (int i = 0; i < listOfBits.size(); i++) {
+   if (FeedbackBitsXored(register, feedbackBits) == listOfBits.get(i)) {
+      xoredValue = 0;
+   } else {
+      xoredValue = 1;
+   }
+ShiftRegister(register, xoredValue);
+```
+
+5. Random generation of a frame counter of 22 bits. It follows the same principle as step 3.
+
+6. For each LFSR performing a xor operations between feedback bits and each bit of frame counter, such as in step 4.
+
+7. Computation of the majority of clocking bits of registers
 
 - Clocking bit of LFSR1 - bit 8;
 - Clocking bit of LFSR2 - bit 10;
 - CLocking bit of LFSR3 - bit 10.
 
-&ensp;&ensp;&ensp; The majority represents the bit that repeats most times. 8. Clocking the register
+&ensp;&ensp;&ensp; The majority represents the bit that repeats most times and is computed in the method _ComputeMajority()_; It has a list that store the values of clocking bit. Then, after the initialization with values, this list is iterated, and the number of 0's and 1's are counted. The value which appear in majority of cases will be returned.
+
+```
+ArrayList<Integer> valueOfClockingBits = new ArrayList<>();
+        valueOfClockingBits.add(ExtractValueOfClockingBits(reg1, clockingBitReg1));
+        valueOfClockingBits.add(ExtractValueOfClockingBits(reg2, clockingBitReg2));
+        valueOfClockingBits.add(ExtractValueOfClockingBits(reg3, clockingBitReg3));
+        //iterate the list to count number of 0's and 1's
+        for (int i = 0; i < 3; i++) {
+            if (valueOfClockingBits.get(i) == 0) countZero++;
+            else countOne++;
+        }
+```
+
+8. Clocking the register
 
 &ensp;&ensp;&ensp; If the clocking bit of the LFSR is equal to the majority computed, then the register is clocked. Clocking of the register represent the xor operation of feedback bits.
 After computing this value, the register is shifted right with one position, and the first position will be completed with the value from the xor operation. If the majority and the clocking bit of the register are different, then the register does not suffer any changes.
-This step will be executed 100 times. 9. Generation of key stream
+This step will be executed 100 times:
 
-&ensp;&ensp;&ensp; The step 8 will be now executed 228 times, but in addition to it, the last bit of the registers will be xored, and te result will be add in an list of bits that will represent the key stream. 10. Encryption
+```
+ for (int i = 0; i < 100; i++) {
+            Integer valueOfMajority = Register.ComputeMajority();
+            Register.IsClocked(valueOfMajority, Register.reg1, Register.clockingBitReg1, Register.feedbackBitsReg1);
+        }
+```
+
+The _RegisterIsClocked()_ method is responsible for performing the changes in the register if the value of majority and the clocking bit are equal:
+
+```
+ if (valueOfMajority == reg.get(clockingBit)) {
+   ShiftRegister(reg, FeedbackBitsXored(reg, feedbackBits));
+}
+```
+
+9. Generation of key stream
+
+&ensp;&ensp;&ensp; The step 8 will be now executed 228 times, but in addition to it, the last bit of the registers will be xored, and te result will be add in an list of bits that will represent the key stream.
+
+10. Encryption
 
 &ensp;&ensp;&ensp;The encryption will be performed using xor operation between each digit from the binary message and each bit of the key stream. If the message is bigger than the key stream, it will be split into lists of 228 bits, and each of them will be xored with the key stream.
 
 11. Conversion of binary message into letters
 
 &ensp;&ensp;&ensp; The last step is conversion of the list of binary digits into letters. First, the list will be split in pieces of 8 digits, and it will be converted in integer values. Than, this values will be converted into letters, according to ASCII table.
-
-```
-
-```
 
 2. ### <i> Block Cipher (DES) </i>
 
@@ -162,4 +216,8 @@ $$R_n = L_{n-1} \oplus f(R\_{n-1}, K_n)$$
 
 IV. Phase 4: Final permutation
 
-&ensp;&ensp;&ensp;The last step consist in permutation of the updated binary message acooording to the rule table $I^{-1}$.
+&ensp;&ensp;&ensp;The last step consist in permutation of the updated binary message acooording to the rule table $I^{-1}$. Then, the list of binary values is converted in letters, using mwthods from the class _BinaryToLettersConverter_
+
+## Conclusion
+
+&ensp;&ensp;&ensp; This laboratory work represented a deeper initiation into cryptography. I discovered and understood the concept of symmetric ciphers, and I managed to implement two different algorithm of symmetric ciphers. Thus, the aim of researching and implementing the encryption and decryption process using different symmetric ciphers was achieved.
