@@ -7,18 +7,20 @@ public class BinaryToLettersConverter {
     public static String PerformConversion(ArrayList<Integer> encryptedMessage) {
         ArrayList<Integer> binaryLetter = new ArrayList<>();
         String encryptedMessageWithLetters = "";
-        for (int i = 0; i < (encryptedMessage.size()) ; i += 8) {
+        for (int i = 0; i < (encryptedMessage.size()); i += 8) {
             binaryLetter.clear();
             for (int j = 0; j < 8; j++) {
 //                System.out.println("i: " + i + " j: " + j );
 //                System.out.println(encryptedMessage.get(i + j));
                 binaryLetter.add(encryptedMessage.get(i + j));
+
             }
-            encryptedMessageWithLetters += (char)ConvertBinaryToDecimal(binaryLetter);
+            encryptedMessageWithLetters += (char) ConvertBinaryToDecimal(binaryLetter);
 
         }
         return encryptedMessageWithLetters;
     }
+
     public static int ConvertBinaryToDecimal(ArrayList<Integer> binaryMessage) {
         int asciiCode = 0;
         for (int i = 0; i < binaryMessage.size(); i++) {

@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.BlockCipher.DESCipher;
+import com.company.BlockCipher.Helper;
 import com.company.BlockCipher.KeyGenerator;
 import com.company.BlockCipher.MessageManipulator;
 import com.company.StreamCipher.A5Cipher;
@@ -9,6 +10,7 @@ import com.company.Utils.LettersToBinaryConverter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -46,6 +48,7 @@ public class Main {
         //DESCipher.Encrypt();
         DESCipher.Encrypt();
         DESCipher.Decrypt(DESCipher.Encrypt());
+
     }
 }
 

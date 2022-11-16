@@ -6,9 +6,9 @@ import static java.util.Arrays.asList;
 
 public class Register {
     //Initialise the LFSR
-    public static ArrayList<Integer> reg1 = new ArrayList<Integer>(Collections.nCopies(19, 0)); // works fine
-    public static ArrayList<Integer> reg2 = new ArrayList<Integer>(Collections.nCopies(22, 0)); // works fine
-    public static ArrayList<Integer> reg3 = new ArrayList<Integer>(Collections.nCopies(23, 0)); // works fine
+    public static ArrayList<Integer> reg1 = new ArrayList<Integer>(Collections.nCopies(19, 0));
+    public static ArrayList<Integer> reg2 = new ArrayList<Integer>(Collections.nCopies(22, 0));
+    public static ArrayList<Integer> reg3 = new ArrayList<Integer>(Collections.nCopies(23, 0));
     //Set list of feedback bits for each LFSR
     public static ArrayList<Integer> feedbackBitsReg1 = new ArrayList<Integer>(asList(13, 16, 17, 18));
     public static ArrayList<Integer> feedbackBitsReg2 = new ArrayList<Integer>(asList(20, 21));
@@ -73,7 +73,7 @@ public class Register {
         return register;
     }
 
-    public static Integer ExtractValueOfClockingBits(ArrayList<Integer> reg, Integer clockingBit) {
+    private static Integer ExtractValueOfClockingBits(ArrayList<Integer> reg, Integer clockingBit) {
         return reg.get(clockingBit);
     }
 
@@ -81,10 +81,12 @@ public class Register {
     public static Integer ComputeMajority() {
         int countZero = 0;
         int countOne = 0;
+        //initialize a list to stock value of clocking bits
         ArrayList<Integer> valueOfClockingBits = new ArrayList<>();
         valueOfClockingBits.add(ExtractValueOfClockingBits(reg1, clockingBitReg1));
         valueOfClockingBits.add(ExtractValueOfClockingBits(reg2, clockingBitReg2));
         valueOfClockingBits.add(ExtractValueOfClockingBits(reg3, clockingBitReg3));
+        //iterate the list to count number of 0's and 1's
         for (int i = 0; i < 3; i++) {
             if (valueOfClockingBits.get(i) == 0) countZero++;
             else countOne++;
@@ -94,6 +96,7 @@ public class Register {
     }
 
     //Clock the register if the value of the clocking bit and the value of majority are equal
+    //Clock --> means to perform xor operation for feedback bits and to shift the register one position in order to add the new computed value
     public static ArrayList<Integer> IsClocked(Integer valueOfMajority, ArrayList<Integer> reg, Integer clockingBit, ArrayList<Integer> feedbackBits) {
         if (valueOfMajority == reg.get(clockingBit)) {
             ShiftRegister(reg, FeedbackBitsXored(reg, feedbackBits));

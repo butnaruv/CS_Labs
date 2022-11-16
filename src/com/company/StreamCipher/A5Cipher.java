@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class A5Cipher {
     static ArrayList<Integer> keyStream = new ArrayList<>();
+
     public static String Encrypt(String message) {
-        System.out.println("Message to encrypt: " + message);
         //convert the string message into arrayList of 0's and 1's
         ArrayList<Integer> messageConvertedInBinary = LettersToBinaryConverter.ConvertListToIntegers(message);
-        //System.out.println("Message converted in binary: " + messageConvertedInBinary);
+
         //randomly generate the session key
         ArrayList<Integer> sessionkey = Register.RandomGeneratorOfSignals(64);
-        //System.out.println("Session key: " + sessionkey);
+
         //xor feedbackbits and session key
         Register.ListOfSignalsAndFeedbackBitsXored(Register.reg1, Register.feedbackBitsReg1, sessionkey);
         Register.ListOfSignalsAndFeedbackBitsXored(Register.reg2, Register.feedbackBitsReg2, sessionkey);
@@ -22,11 +22,12 @@ public class A5Cipher {
 
         //randomly generate frame counter
         ArrayList<Integer> frameCounter = Register.RandomGeneratorOfSignals(22);
-        //System.out.println("Frame counter: " + frameCounter);
+
         //xor feedback bits and frame counter
         Register.ListOfSignalsAndFeedbackBitsXored(Register.reg1, Register.feedbackBitsReg1, frameCounter);
         Register.ListOfSignalsAndFeedbackBitsXored(Register.reg2, Register.feedbackBitsReg2, frameCounter);
         Register.ListOfSignalsAndFeedbackBitsXored(Register.reg3, Register.feedbackBitsReg3, frameCounter);
+
         //compute majority 100 times and clock the registers if needed
         for (int i = 0; i < 100; i++) {
             //value to stock majority
@@ -46,38 +47,31 @@ public class A5Cipher {
             Register.IsClocked(valueOfMajority, Register.reg2, Register.clockingBitReg2, Register.feedbackBitsReg2);
             Register.IsClocked(valueOfMajority, Register.reg3, Register.clockingBitReg3, Register.feedbackBitsReg3);
         }
-        //System.out.println("Key stream: " + keyStream);
-
+        //XOR binary message and generated key stream
         ArrayList<Integer> encryptedBinaryMessage = new ArrayList<>();
         for (int i = 0; i < messageConvertedInBinary.size(); i++) {
-            if(messageConvertedInBinary.get(i) == keyStream.get(i)) encryptedBinaryMessage.add(0);
+            if (messageConvertedInBinary.get(i) == keyStream.get(i)) encryptedBinaryMessage.add(0);
             else encryptedBinaryMessage.add(1);
         }
-        //System.out.println("ENCRYPTED");
-        //System.out.println(encryptedBinaryMessage);
         //transform the numbers into letters
         System.out.print("Encrypted message: ");
         return BinaryToLettersConverter.PerformConversion(encryptedBinaryMessage);
     }
-    public static String Decrypt(String encryptedMessage){
-//        System.out.println("DECRYPTION PROCESS");
-//        System.out.println("Message: " + encryptedMessage);
-        ArrayList<Integer> messageConvertedInBinary = LettersToBinaryConverter.ConvertListToIntegers(encryptedMessage);
-//        System.out.println("Message converted in binary: " + messageConvertedInBinary);
 
+    public static String Decrypt(String encryptedMessage) {
+        //convert the string message into arrayList of 0's and 1's
+        ArrayList<Integer> encryptedBinaryMessage = LettersToBinaryConverter.ConvertListToIntegers(encryptedMessage);
+
+        //XOR encrypted binary message and key stream
         ArrayList<Integer> decryptedBinaryMessage = new ArrayList<>();
-        for (int i = 0; i < messageConvertedInBinary.size(); i++) {
-            if(messageConvertedInBinary.get(i) == keyStream.get(i)) decryptedBinaryMessage.add(0);
+        for (int i = 0; i < encryptedBinaryMessage.size(); i++) {
+            if (encryptedBinaryMessage.get(i) == keyStream.get(i)) decryptedBinaryMessage.add(0);
             else decryptedBinaryMessage.add(1);
         }
-//        System.out.println("KS: " + keyStream);
-//        System.out.println("Decrypted");
-//        System.out.println(decryptedBinaryMessage);
-//        System.out.println(decryptedBinaryMessage.size());
+
         //transform the numbers into letters
         System.out.print("Decrypted message: ");
         return BinaryToLettersConverter.PerformConversion(decryptedBinaryMessage);
-        //return "A";
     }
 
 }
