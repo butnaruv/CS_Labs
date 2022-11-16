@@ -55,7 +55,7 @@ public class A5Cipher {
         }
         //transform the numbers into letters
         System.out.print("Encrypted message: ");
-        return BinaryToLettersConverter.PerformConversion(encryptedBinaryMessage);
+        return BinaryToLettersConverter.ConvertToCharacters(encryptedBinaryMessage);
     }
 
     public static String Decrypt(String encryptedMessage) {
@@ -71,7 +71,7 @@ public class A5Cipher {
 
         //transform the numbers into letters
         System.out.print("Decrypted message: ");
-        return BinaryToLettersConverter.PerformConversion(decryptedBinaryMessage);
+        return BinaryToLettersConverter.ConvertToCharacters(decryptedBinaryMessage);
     }
 
 }

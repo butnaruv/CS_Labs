@@ -48,9 +48,9 @@ public class DESCipher {
         }
         //permute the updated binaryMessage according to rule table IP_1
         binaryMessage = Helper.PermuteList(binaryMessage, IP_1);
-        System.out.println(BinaryToLettersConverter.PerformConversion(binaryMessage));
+        System.out.println(BinaryToLettersConverter.ConvertToCharacters(binaryMessage));
         //convert binary message into letters.
-        return BinaryToLettersConverter.PerformConversion(binaryMessage);
+        return BinaryToLettersConverter.ConvertToCharacters(binaryMessage);
     }
 
     public static String Decrypt(String encryptedMessage) {
@@ -70,8 +70,8 @@ public class DESCipher {
         }
         //permute the updated binaryMessage according to rule table IP_1
         binaryEncryptedMessage = Helper.PermuteList(binaryEncryptedMessage, IP_1);
-        System.out.println(BinaryToLettersConverter.PerformConversion(binaryEncryptedMessage));
+        System.out.println(BinaryToLettersConverter.ConvertToCharacters(binaryEncryptedMessage));
         //convert binary message into letters.
-        return BinaryToLettersConverter.PerformConversion(binaryEncryptedMessage);
+        return BinaryToLettersConverter.ConvertToCharacters(binaryEncryptedMessage);
     }
 }

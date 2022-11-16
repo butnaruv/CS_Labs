@@ -5,39 +5,40 @@ import java.util.Arrays;
 
 public class LettersToBinaryConverter {
     public static String LettersConverter(String message) {
-        //ArrayList<Integer> binaryMessage = new ArrayList<>();
         String binaryMessage = "";
         for (Character character : message.toCharArray()) {
             var asciiCode = (int) character;
+            //if the character is space, ignore it
             if (asciiCode == 32) continue;
-            // System.out.println(asciiCode);
             var a = DecimalToBinaryConverter(asciiCode);
-            //binaryMessage.add(Integer.valueOf(DecimalToBinaryConverter(asciiCode)));
             binaryMessage += DecimalToBinaryConverter(asciiCode);
-
         }
         return binaryMessage;
     }
 
     public static String DecimalToBinaryConverter(int asciiCode) {
         String binary = "";
-        int aasciicode = asciiCode;
-        //System.out.println("ascii: " + asciiCode);
+        //initialize the value to verify if the binary value of it is of 8 bit length
+        int ascii = asciiCode;
+
         while (asciiCode != 0) {
             int remainder = asciiCode % 2;
             asciiCode = asciiCode / 2;
             binary = binary + remainder;
         }
-        if (aasciicode < 64) {
-            //System.out.println("The if is entered: ");
+        //if ascii code is less than 64, that means that the value in binary can be stocked with 6 bits
+        //--->thus, two 0's are added
+        //else if ascii code is between 64 and 128, it has the value in binary of length 7
+        //--->this, one 0 is added
+        if (ascii < 64) {
             binary = "00" + InverseString(binary);
-        } else if (aasciicode < 128 && aasciicode > 64) {
+        } else if (ascii < 128 && ascii > 64) {
             binary = "0" + InverseString(binary);
         } else binary = InverseString(binary);
-        //System.out.println("In binary: " + binary);
         return binary;
     }
 
+    //inverse the string
     static String InverseString(String binaryNumber) {
         String binaryInverted = "";
         for (int i = binaryNumber.length() - 1; i >= 0; i--) {

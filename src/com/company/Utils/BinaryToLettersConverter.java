@@ -4,16 +4,15 @@ import java.util.ArrayList;
 
 public class BinaryToLettersConverter {
 
-    public static String PerformConversion(ArrayList<Integer> encryptedMessage) {
+    public static String ConvertToCharacters(ArrayList<Integer> encryptedMessage) {
+        //initialize list to stock binary values
         ArrayList<Integer> binaryLetter = new ArrayList<>();
         String encryptedMessageWithLetters = "";
+        //iterate the message to split it into blocks of 8 bits
         for (int i = 0; i < (encryptedMessage.size()); i += 8) {
             binaryLetter.clear();
             for (int j = 0; j < 8; j++) {
-//                System.out.println("i: " + i + " j: " + j );
-//                System.out.println(encryptedMessage.get(i + j));
                 binaryLetter.add(encryptedMessage.get(i + j));
-
             }
             encryptedMessageWithLetters += (char) ConvertBinaryToDecimal(binaryLetter);
 
@@ -23,15 +22,19 @@ public class BinaryToLettersConverter {
 
     public static int ConvertBinaryToDecimal(ArrayList<Integer> binaryMessage) {
         int asciiCode = 0;
+        //iterate the binary list
         for (int i = 0; i < binaryMessage.size(); i++) {
+            // when the bit is equl to 1, compute 2 ^ (binaryMessage.size() - (i + 1));
+            // ex for 3 bit: * bit 0 --> 2^2
+            //               * bit 1 --> 2^1
+            //               * bit 2 --> 2^0
             if (binaryMessage.get(i) == 1) {
-                //putem modifica 7-i cu binaryMessage.size - (i + 1) ca sa fie generica
-                //int compute = (int) Math.pow(2, (7 - i));
                 int compute = (int) Math.pow(2, (binaryMessage.size() - (i + 1)));
                 asciiCode = asciiCode + compute;
             }
         }
-        //System.out.println(asciiCode);
         return asciiCode;
     }
 }
+//putem modifica 7-i cu binaryMessage.size - (i + 1) ca sa fie generica
+//int compute = (int) Math.pow(2, (7 - i));
