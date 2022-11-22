@@ -32,7 +32,7 @@ public class RSA {
             //concatenate letters
             cipherText += (char) (cipherTextDecimalCharacter.intValue());
         }
-        System.out.println("Cipher text: " + cipherText);
+//        System.out.println("Cipher text: " + cipherText);
         return cipherText;
     }
 
@@ -49,7 +49,7 @@ public class RSA {
             plainTextDecimalCharacter = (cipherTextDecimalCharacter.pow(decryptKey)).mod(BigInteger.valueOf(NValue));
             plainText += (char) (plainTextDecimalCharacter.intValue());
         }
-        System.out.println("Plain text: " + plainText);
+//        System.out.println("Plain text: " + plainText);
         return plainText;
     }
 
