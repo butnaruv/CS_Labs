@@ -1,4 +1,4 @@
-package com.company.BlockCipher;
+package com.company.SymmetricCiphers.BlockCipher;
 
 import com.company.Utils.BinaryToLettersConverter;
 import com.company.Utils.LettersToBinaryConverter;
@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.company.BlockCipher.MessageManipulator.Round;
+import static com.company.SymmetricCiphers.BlockCipher.MessageManipulator.Round;
 
 public class DESCipher {
-    private static String message = "actualaz";
+    //private static String message = "actualaz";
     //rule table to permute initial binary message
     public static List<Integer> IP = Arrays.asList(
             58, 50, 42, 34, 26, 18, 10, 2, 60, 52, 44,
@@ -29,13 +29,13 @@ public class DESCipher {
             51, 19, 59, 27, 34, 2, 42, 10, 50, 18, 58,
             26, 33, 1, 41, 9, 49, 17, 57, 25);
 
-    public static String Encrypt() {
+    public static String Encrypt(String message, String key) {
         //convert string message in binary
         ArrayList<Integer> binaryMessage = LettersToBinaryConverter.ConvertListToIntegers(message);
         //permute the binary message according to rules from IP
         binaryMessage = Helper.PermuteList(binaryMessage, IP);
         //generate the list of 16 keys
-        ArrayList<ArrayList<Integer>> listOfSubKeys = KeyGenerator.GenerateKey();
+        ArrayList<ArrayList<Integer>> listOfSubKeys = KeyGenerator.GenerateKey(key);
         ArrayList<Integer> subKey;
         //iterate 16 times, in order to perform round operation 16 times (phase III)
         for (int i = 0; i < 16; i++) {
@@ -48,18 +48,17 @@ public class DESCipher {
         }
         //permute the updated binaryMessage according to rule table IP_1
         binaryMessage = Helper.PermuteList(binaryMessage, IP_1);
-        System.out.println(BinaryToLettersConverter.ConvertToCharacters(binaryMessage));
         //convert binary message into letters.
         return BinaryToLettersConverter.ConvertToCharacters(binaryMessage);
     }
 
-    public static String Decrypt(String encryptedMessage) {
+    public static String Decrypt(String encryptedMessage, String key) {
         //convert string message in binary
         ArrayList<Integer> binaryEncryptedMessage = LettersToBinaryConverter.ConvertListToIntegers(encryptedMessage);
         //permute the binary message according to rules from IP
         binaryEncryptedMessage = Helper.PermuteList(binaryEncryptedMessage, IP);
         //generate the list of 16 keys
-        ArrayList<ArrayList<Integer>> listOfSubKeys = KeyGenerator.GenerateKey();
+        ArrayList<ArrayList<Integer>> listOfSubKeys = KeyGenerator.GenerateKey( key);
         ArrayList<Integer> subKey;
         int iteration = 0;
         //iterate 16 times, in order to perform round operation 16 times (phase III)
@@ -70,7 +69,6 @@ public class DESCipher {
         }
         //permute the updated binaryMessage according to rule table IP_1
         binaryEncryptedMessage = Helper.PermuteList(binaryEncryptedMessage, IP_1);
-        System.out.println(BinaryToLettersConverter.ConvertToCharacters(binaryEncryptedMessage));
         //convert binary message into letters.
         return BinaryToLettersConverter.ConvertToCharacters(binaryEncryptedMessage);
     }

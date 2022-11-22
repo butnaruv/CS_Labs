@@ -1,4 +1,4 @@
-package com.company.BlockCipher;
+package com.company.SymmetricCiphers.BlockCipher;
 
 import com.company.Utils.LettersToBinaryConverter;
 
@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class KeyGenerator {
-    private static String key = "12345678";
+    //private static String key = "12345678";
     private static List<Integer> PC1 = Arrays.asList(
             57, 49, 41, 33, 25, 17, 9, 1, 58, 50,
             42, 34, 26, 18, 10, 2, 59, 51, 43, 35,
@@ -22,7 +22,7 @@ public class KeyGenerator {
             30, 40, 51, 45, 33, 48, 44, 49, 39, 56,
             34, 53, 46, 42, 50, 36, 29, 32);
 
-    public static ArrayList<ArrayList<Integer>> GenerateKey() {
+    public static ArrayList<ArrayList<Integer>> GenerateKey(String key) {
 
         ArrayList<Integer> binaryKey = LettersToBinaryConverter.ConvertListToIntegers(key);
         //permutate key according PC1 rule table

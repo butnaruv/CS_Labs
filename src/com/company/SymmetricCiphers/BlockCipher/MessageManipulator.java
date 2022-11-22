@@ -1,4 +1,4 @@
-package com.company.BlockCipher;
+package com.company.SymmetricCiphers.BlockCipher;
 
 import com.company.Utils.BinaryToLettersConverter;
 

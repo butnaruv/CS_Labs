@@ -1,18 +1,10 @@
 package com.company;
 
-import com.company.BlockCipher.DESCipher;
-import com.company.BlockCipher.Helper;
-import com.company.BlockCipher.KeyGenerator;
-import com.company.BlockCipher.MessageManipulator;
-import com.company.StreamCipher.A5Cipher;
-import com.company.Utils.BinaryToLettersConverter;
-import com.company.Utils.LettersToBinaryConverter;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Arrays.asList;
+import com.company.AsymmetricCipher.KeyGenerator;
+import com.company.AsymmetricCipher.RSA;
+import com.company.UnitTests.TestA5;
+import com.company.UnitTests.TestDES;
+import com.company.UnitTests.TestRSA;
 
 public class Main {
 
@@ -38,17 +30,22 @@ public class Main {
 //        System.out.println("Decrypted message using Playfair Cipher:  ");
 //        System.out.println(PlayfairCipher.Decrypt("ikkidcqinzmcfr", keyword));
         //PerformOperations.performOperations();
-//        String message = "bun";
+//        String message = "curajos";
 //        String encryptedMessage = A5Cipher.Encrypt(message);
 //        System.out.println(encryptedMessage);
 //        String decryptedMessage = A5Cipher.Decrypt(encryptedMessage);
 //        System.out.println(decryptedMessage);
 
-        //DES
-        //DESCipher.Encrypt();
-        DESCipher.Encrypt();
-        DESCipher.Decrypt(DESCipher.Encrypt());
+//        //DES
+//        TestDES.TestDesCipher();
+//
+//        //A5
+//        TestA5.TestA5Cipher();
 
+        //RSA.KeyGenerator();
+        //KeyGenerator.KeyGenerator();
+        TestRSA.TestRSA();
+        //System.out.println(KeyGenerator.GreatestCommonDivisor(18,24));
     }
 }
 

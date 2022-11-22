@@ -1,4 +1,4 @@
-package com.company.StreamCipher;
+package com.company.SymmetricCiphers.StreamCipher;
 
 import com.company.Utils.BinaryToLettersConverter;
 import com.company.Utils.LettersToBinaryConverter;
@@ -54,7 +54,6 @@ public class A5Cipher {
             else encryptedBinaryMessage.add(1);
         }
         //transform the numbers into letters
-        System.out.print("Encrypted message: ");
         return BinaryToLettersConverter.ConvertToCharacters(encryptedBinaryMessage);
     }
 
@@ -70,7 +69,6 @@ public class A5Cipher {
         }
 
         //transform the numbers into letters
-        System.out.print("Decrypted message: ");
         return BinaryToLettersConverter.ConvertToCharacters(decryptedBinaryMessage);
     }
 

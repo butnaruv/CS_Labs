@@ -1,4 +1,4 @@
-package com.company.StreamCipher;
+package com.company.SymmetricCiphers.StreamCipher;
 
 import java.util.*;
 
