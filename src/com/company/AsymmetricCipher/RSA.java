@@ -1,53 +1,66 @@
 package com.company.AsymmetricCipher;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+
+import static com.company.AsymmetricCipher.KeyGenerator.*;
+import static com.company.AsymmetricCipher.KeyGenerator.DecryptKey;
 
 public class RSA {
+    private static int limitOfPrimes = 40;
+    private static ArrayList<Integer> primeNumbers = SieveOfEratosthenes(limitOfPrimes);
 
-    // mai intai chemam metoda key generator in unit test, apoi lucram cu valorile pe care le primim
-    public static String Encrypt(String message, int NValue, int FiFunction, int encryptKey) {
-        System.out.println("--------ENCRYPT--------");
-        System.out.println("Nvalue: " + NValue);
-        System.out.println("FiFunction: " + FiFunction);
-        System.out.println("Encrypt key: " + encryptKey);
-        //convert text to decimal number
-        BigInteger bigIntegerDecimalCharacter;
-        int integerDecimalCharacter;
-        //BigInteger convertedDecimalCharacter;
-        String convertedString = "";
+    private static int p = RandomGenerator(primeNumbers);
+    private static int q = RandomGenerator(primeNumbers);
+    private static int NValue;
+    private static int FiFunction;
+    private static int encryptKey;
+    private static int decryptKey;
+
+    public static String Encrypt(String message) {
+
+        //variable for decimal value of plain text (BigInteger)
+        BigInteger plainTextDecimalCharacter;
+        //variable for decimal value of cipher text (BigInteger)
+        BigInteger cipherTextDecimalCharacter;
+        // variable for cipher text (String)
+        String cipherText = "";
         for (char character : message.toCharArray()) {
-            bigIntegerDecimalCharacter = new BigInteger (String.valueOf((int) character ));
-            System.out.println("decimal character: " + bigIntegerDecimalCharacter);
-            var convertedDecimalCharacter = (bigIntegerDecimalCharacter.pow(encryptKey)).mod(BigInteger.valueOf(NValue));
-            System.out.println(convertedDecimalCharacter);
-            integerDecimalCharacter = convertedDecimalCharacter.intValue();
-            convertedString += (char)(integerDecimalCharacter );
+            plainTextDecimalCharacter = new BigInteger(String.valueOf((int) character));
+            //apply formula for converting decimal values
+            cipherTextDecimalCharacter = (plainTextDecimalCharacter.pow(encryptKey)).mod(BigInteger.valueOf(NValue));
+            //concatenate letters
+            cipherText += (char) (cipherTextDecimalCharacter.intValue());
         }
-        System.out.println(convertedString);
-        return convertedString;
+        System.out.println("Cipher text: " + cipherText);
+        return cipherText;
     }
 
-    public static String Decrypt(String encryptedMessage, int NValue, int decryptKey) {
-        System.out.println("--------DECRYPT--------");
-        System.out.println("Nvalue: " + NValue);
-        //System.out.println("FiFunction: " + FiFunction);
-        System.out.println("Decrypt key: " + decryptKey);
-        BigInteger bigIntegerDecimalCharacter;
-        int integerDecimalCharacter;
-        //BigInteger convertedDecimalCharacter;
-        String convertedString = "";
+    public static String Decrypt(String encryptedMessage) {
+        //variable for decimal value of cipher text (BigInteger)
+        BigInteger cipherTextDecimalCharacter;
+        //variable for decimal value of plain text (BigInteger)
+        BigInteger plainTextDecimalCharacter;
+        //variable for plain text (String)
+        String plainText = "";
         for (char character : encryptedMessage.toCharArray()) {
-            int decimalCharacter = (int) character ;
-            bigIntegerDecimalCharacter = new BigInteger (String.valueOf(decimalCharacter));
-            System.out.println("decimal character: " + bigIntegerDecimalCharacter);
-            var convertedDecimalCharacter = (bigIntegerDecimalCharacter.pow(decryptKey)).mod(BigInteger.valueOf(NValue));
-            System.out.println(convertedDecimalCharacter);
-            int differenceDecimalCharacterAndN = decimalCharacter/NValue;
-            integerDecimalCharacter = convertedDecimalCharacter.intValue();
-            convertedString += (char)(integerDecimalCharacter );
+            cipherTextDecimalCharacter = new BigInteger(String.valueOf((int) character));
+            //apply formula for converting decimal values
+            plainTextDecimalCharacter = (cipherTextDecimalCharacter.pow(decryptKey)).mod(BigInteger.valueOf(NValue));
+            plainText += (char) (plainTextDecimalCharacter.intValue());
         }
-        System.out.println(convertedString);
-        return convertedString;
+        System.out.println("Plain text: " + plainText);
+        return plainText;
+    }
+
+    public static void ComputeKeys() {
+        while (p == q) {
+            q = RandomGenerator(primeNumbers);
+        }
+        NValue = p * q;
+        FiFunction = (p - 1) * (q - 1);
+        encryptKey = EncryptKey(NValue, FiFunction, p, q);
+        decryptKey = DecryptKey(encryptKey, FiFunction);
     }
 
 }
