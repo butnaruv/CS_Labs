@@ -14,11 +14,9 @@
 
 ## Objectives:
 
-1. Get familiar with the symmetric cryptography, stream and block ciphers.
+1. Get familiar with the asymmetric cryptography
 
-2. Implement an example of a stream cipher.
-
-3. Implement an example of a block cipher.
+2. Implement an example of an assymetric cipher.
 
 ---
 
@@ -110,3 +108,7 @@ where:
 - _N_ is the modulo number (composed using _p_ and _q_)
 
 * Now the numbers are ready to be converted into letters. Then using concatenating process of a string, each letter is added to the string. This is how the message is decrypted.
+
+## Conclusion
+
+&ensp;&ensp;&ensp; This laboratory work represented an initiation into asymmetric cryptography. I discovered and understood the concept of asymmetric ciphers, and I managed to implement an algorithm - The RSA algorithm Thus, the aim of researching and implementing the encryption and decryption process using an asymmetric cipher was achieved.
