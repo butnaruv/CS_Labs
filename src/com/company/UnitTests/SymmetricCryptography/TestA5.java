@@ -1,4 +1,4 @@
-package com.company.UnitTests.AsymmetricCryptography;
+package com.company.UnitTests.SymmetricCryptography;
 
 import com.company.SymmetricCiphers.StreamCipher.A5Cipher;
 

@@ -6,7 +6,7 @@ public class TestPlayfair {
     private static String message = "cryptography";
     private static String keyWord = "alibaba";
 
-    public static void testPlayfair(){
+    public static void TestPlayfair(){
         String cipherText = PlayfairCipher.Encrypt(message, keyWord);
         String plainText = PlayfairCipher.Decrypt(cipherText, keyWord);
         if(message.equals(plainText)){

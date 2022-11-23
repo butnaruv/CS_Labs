@@ -1,6 +1,6 @@
 package com.company;
 
-import com.company.UnitTests.AsymmetricCryptography.TestA5;
+import com.company.UnitTests.SymmetricCryptography.TestA5;
 import com.company.UnitTests.AsymmetricCryptography.TestRSA;
 import com.company.UnitTests.ClassicCryptography.TestCaesarClassic;
 import com.company.UnitTests.ClassicCryptography.TestPlayfair;
@@ -13,8 +13,8 @@ public class Main {
 
         System.out.println("------CLASSICAL CIPHERS------");
         TestCaesarClassic.TestCaesarClassic();
-        TestVigenere.testVigenere();
-        TestPlayfair.testPlayfair();
+        TestVigenere.TestVigenere();
+        TestPlayfair.TestPlayfair();
 
         System.out.println();
         System.out.println("------SYMMETRIC CIPHERS------");

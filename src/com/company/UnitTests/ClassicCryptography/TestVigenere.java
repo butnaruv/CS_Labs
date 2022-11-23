@@ -5,7 +5,7 @@ import com.company.ClassicalCiphers.PlayfairCipher;
 public class TestVigenere {
     private static String message = "cryptography";
     private static String keyWord = "alibaba";
-    public static void testVigenere(){
+    public static void TestVigenere(){
         String cipherText = PlayfairCipher.Encrypt(message, keyWord);
         String plainText = PlayfairCipher.Decrypt(cipherText, keyWord);
         if(message.equals(plainText)){
