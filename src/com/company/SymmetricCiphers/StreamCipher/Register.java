@@ -98,7 +98,10 @@ public class Register {
     //Clock the register if the value of the clocking bit and the value of majority are equal
     //Clock --> means to perform xor operation for feedback bits and to shift the register one position in order to add the new computed value
     public static ArrayList<Integer> IsClocked(Integer valueOfMajority, ArrayList<Integer> reg, Integer clockingBit, ArrayList<Integer> feedbackBits) {
-
+        if(valueOfMajority == reg.get(clockingBit)){
+            int valueToAdd = FeedbackBitsXored(reg, feedbackBits);
+            reg = ShiftRegister(reg,valueToAdd );
+        }
         return reg;
     }
 
