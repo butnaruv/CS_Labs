@@ -69,7 +69,7 @@ public class KeyGenerator {
     public static Integer DecryptKey(Integer encryptKey, Integer Fi_N) {
         //initialize a variable which helps to compute the multiple of Fi_N
         int decryptKey = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < Fi_N; i++) {
             int x = 1 + (i * Fi_N);
             if (x % encryptKey == 0) {
                 decryptKey = x / encryptKey;

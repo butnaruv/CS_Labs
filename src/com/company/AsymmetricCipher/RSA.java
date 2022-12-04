@@ -37,6 +37,7 @@ public class RSA {
     }
 
     public static String Decrypt(String encryptedMessage) {
+
         //variable for decimal value of cipher text (BigInteger)
         BigInteger cipherTextDecimalCharacter;
         //variable for decimal value of plain text (BigInteger)
@@ -61,6 +62,12 @@ public class RSA {
         FiFunction = (p - 1) * (q - 1);
         encryptKey = EncryptKey(NValue, FiFunction, p, q);
         decryptKey = DecryptKey(encryptKey, FiFunction);
+//        System.out.println(p);
+//        System.out.println(q);
+//        System.out.println(NValue);
+//        System.out.println(FiFunction);
+//        System.out.println(encryptKey);
+//        System.out.println(decryptKey);
     }
 
 }
