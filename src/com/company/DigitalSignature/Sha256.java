@@ -19,22 +19,21 @@ public class Sha256 {
         // 2. encrypt hash
         RSA.ComputeKeys();
         var encryptedHash = RSA.Encrypt(digest);
-        var decryptedHash = RSA.Decrypt(encryptedHash);
         //remove all spaces in hash
         var encryptedHashWithoutSpaces = encryptedHash.replaceAll("\\s", "");
 
         // 3. save message and encryptedHash into file (content of file will be fields for verify)
-        FileWriter myWriter = new FileWriter("filename.txt");
+        FileWriter myWriter = new FileWriter("digitalData.txt");
         myWriter.write(message + "\n");
         myWriter.write(encryptedHash);
         myWriter.close();
 
         // 4. read from file (extract fields (message and encryptedHash) from file)
-        var initialMessage = Files.readAllLines(Paths.get("filename.txt")).get(0);
-        var signedDocument = Files.readAllLines(Paths.get("filename.txt")).get(1);
+        var initialMessage = Files.readAllLines(Paths.get("digitalData.txt")).get(0);
+        var signedDocument = Files.readAllLines(Paths.get("digitalData.txt")).get(1);
         ;
         // 5. verify extracted fields (message and encryptedHash)
-        var authenticity = VefifyAuthenticity(signedDocument, initialMessage);
+        var authenticity = VerifyAuthenticity(signedDocument, initialMessage);
         if (authenticity) {
             return true;
         } else {
@@ -46,13 +45,13 @@ public class Sha256 {
 
         MessageDigest hashAlgorithm = MessageDigest.getInstance("SHA-256");
         byte[] messageByteArray = message.getBytes(StandardCharsets.UTF_8);
-        byte[] encodedHash = hashAlgorithm.digest(messageByteArray);
-        BigInteger hashedString = new BigInteger(1, encodedHash);
+        byte[] hash = hashAlgorithm.digest(messageByteArray);
+        BigInteger hashedString = new BigInteger(1, hash);
 
         return hashedString.toString(16);
     }
 
-    public static boolean VefifyAuthenticity(String digitalSignature, String message) throws NoSuchAlgorithmException {
+    public static boolean VerifyAuthenticity(String digitalSignature, String message) throws NoSuchAlgorithmException {
         //get hash of message
         var digest = GetDigest(message);
         //System.out.println(digest);
