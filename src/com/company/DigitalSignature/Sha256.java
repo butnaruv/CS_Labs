@@ -20,7 +20,7 @@ public class Sha256 {
         RSA.ComputeKeys();
         var encryptedHash = RSA.Encrypt(digest);
         //remove all spaces in hash
-        var encryptedHashWithoutSpaces = encryptedHash.replaceAll("\\s", "");
+        encryptedHash = encryptedHash.replaceAll("\\s", "");
 
         // 3. save message and encryptedHash into file (content of file will be fields for verify)
         FileWriter myWriter = new FileWriter("digitalData.txt");
@@ -34,11 +34,7 @@ public class Sha256 {
         ;
         // 5. verify extracted fields (message and encryptedHash)
         var authenticity = VerifyAuthenticity(signedDocument, initialMessage);
-        if (authenticity) {
-            return true;
-        } else {
-            return false;
-        }
+        return authenticity;
     }
 
     public static String GetDigest(String message) throws NoSuchAlgorithmException {

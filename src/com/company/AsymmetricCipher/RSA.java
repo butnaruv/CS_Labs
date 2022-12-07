@@ -7,7 +7,7 @@ import static com.company.AsymmetricCipher.KeyGenerator.*;
 import static com.company.AsymmetricCipher.KeyGenerator.DecryptKey;
 
 public class RSA {
-    private static int limitOfPrimes = 40;
+    private static int limitOfPrimes = 400;
     private static ArrayList<Integer> primeNumbers = SieveOfEratosthenes(limitOfPrimes);
 
     private static int p = RandomGenerator(primeNumbers);
@@ -62,12 +62,7 @@ public class RSA {
         FiFunction = (p - 1) * (q - 1);
         encryptKey = EncryptKey(NValue, FiFunction, p, q);
         decryptKey = DecryptKey(encryptKey, FiFunction);
-//        System.out.println(p);
-//        System.out.println(q);
-//        System.out.println(NValue);
-//        System.out.println(FiFunction);
-//        System.out.println(encryptKey);
-//        System.out.println(decryptKey);
+
     }
 
 }

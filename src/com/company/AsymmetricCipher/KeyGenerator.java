@@ -53,7 +53,6 @@ public class KeyGenerator {
         }
     }
 
-    //de adaugat cerinta ca i != de p si q
     public static Integer EncryptKey(Integer NValue, Integer Fi_N, int p, int q) {
         ArrayList<Integer> primeNumbersUntilN = SieveOfEratosthenes(NValue);
         Integer firstKey = 0;
