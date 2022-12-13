@@ -6,7 +6,7 @@ public class TestCaesarPermutation {
     private static String message = "cryptography";
     private static String keyWord = "alibaba";
     private static int key = 2;
-    public static void testCaesarPermutation(){
+    public static void TestCaesarPermutation(){
         String cipherText = CaesarCipherWithPermutation.Encrypt(message, keyWord, key);
         String plainText = CaesarCipherWithPermutation.Decrypt(cipherText, keyWord, key);
         if(message.equals(plainText)){

@@ -58,7 +58,7 @@ public class DESCipher {
         //permute the binary message according to rules from IP
         binaryEncryptedMessage = Helper.PermuteList(binaryEncryptedMessage, IP);
         //generate the list of 16 keys
-        ArrayList<ArrayList<Integer>> listOfSubKeys = KeyGenerator.GenerateKey( key);
+        ArrayList<ArrayList<Integer>> listOfSubKeys = KeyGenerator.GenerateKey(key);
         ArrayList<Integer> subKey;
         int iteration = 0;
         //iterate 16 times, in order to perform round operation 16 times (phase III)
