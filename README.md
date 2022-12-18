@@ -16,4 +16,4 @@
 
 ## Laboratory works
 
-[Laboratory Work #1](https://github.com/butnaruv/CS_Labs/tree/main/src/com/company/lab1_cs_report.md)
+[Laboratory Work #1](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab1_cs_report.md)
