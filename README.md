@@ -17,6 +17,9 @@
 ## Laboratory works
 
 [Laboratory Work #1](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab1_cs_report.md)
+
 [Laboratory Work #2](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab2_cs_report.md)
+
 [Laboratory Work #3](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab3_cs_report.md)
+
 [Laboratory Work #4](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab4_cs_report.md)
