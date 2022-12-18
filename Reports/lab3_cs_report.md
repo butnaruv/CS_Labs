@@ -111,4 +111,4 @@ where:
 
 ## Conclusion
 
-&ensp;&ensp;&ensp; This laboratory work represented an initiation into asymmetric cryptography. I discovered and understood the concept of asymmetric ciphers, and I managed to implement an algorithm - The RSA algorithm Thus, the aim of researching and implementing the encryption and decryption process using an asymmetric cipher was achieved.
+&ensp;&ensp;&ensp; This laboratory work represented an initiation into asymmetric cryptography. I discovered and understood the concept of asymmetric ciphers, and I managed to implement an algorithm - The RSA algorithm. Thus, the aim of researching and implementing the encryption and decryption process using an asymmetric cipher was achieved.
