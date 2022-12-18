@@ -23,3 +23,5 @@
 [Laboratory Work #3](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab3_cs_report.md)
 
 [Laboratory Work #4](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab4_cs_report.md)
+
+[Laboratory Work #5](https://github.com/butnaruv/CS_Labs/blob/main/Reports/lab5_cs_report.md)
