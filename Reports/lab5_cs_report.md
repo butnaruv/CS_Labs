@@ -8,9 +8,7 @@
 
 ## Theory
 
-&ensp;&ensp;&ensp;  In simple terms, authentication is the process of verifying who a user is, while authorization is the process of verifying what they have access to.
-
-Thus, access to a resource is protected by both authentication and authorization. If you can't prove your identity, you won't be allowed into a resource. And even if you can prove your identity, if you are not authorized for that resource, you will still be denied access.
+&ensp;&ensp;&ensp;  In simple terms, authentication is the process of verifying who a user is, while authorization is the process of verifying what they have access to. Thus, access to a resource is protected by both authentication and authorization. If you can't prove your identity, you won't be allowed into a resource. And even if you can prove your identity, if you are not authorized for that resource, you will still be denied access.
 
 The most common authentication factors are 
 * Password-based authentication  
@@ -81,7 +79,7 @@ JwtClaimsSet claims = JwtClaimsSet.builder()
 
 Then using an JwtEncoder object named _encoder_, the token is generated:
 ```
-         encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+encoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 ```
 
 4. The last step in autentication part is creation of a controller responsible for this process. In this project, this controller is _AuthController_ which has a POST method through the user send its credentials and based on these, the token is generated.
